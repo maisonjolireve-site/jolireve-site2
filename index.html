@@ -28,29 +28,144 @@
 </header>
 
 <!-- ============ HERO ============ -->
-<section class="hero" id="accueil">
-  <img class="hero__bg" src="images/spa-hero.jpeg" alt="Spa de nage chauffé illuminé de guirlandes lumineuses, dans la cour en pierre de Jolirêve au crépuscule">
-  <div class="hero__scrim"></div>
-  <div class="hero__content">
-    <p class="eyebrow eyebrow--light">Celle-Lévescault · Nouvelle-Aquitaine</p>
-    <h1 class="hero__title">Le séjour dont on parle encore six mois après.</h1>
-    <p class="hero__sub">Une grange en pierre entièrement privatisée, son spa de nage chauffé et sa cour close, au cœur d'un hameau silencieux à 35 minutes du Futuroscope.</p>
-    <div class="hero__cta">
-      <a href="#reservation" class="btn btn--primary">Vérifier les disponibilités</a>
-      <a href="#galerie" class="btn btn--ghost">Voir les photos</a>
-    </div>
-  </div>
-  <div class="hero__badges">
-    <div class="badge">
-      <span class="badge__stars">★★★★</span>
-      <span class="badge__label">Classé Meublé de Tourisme</span>
-    </div>
-    <div class="badge badge--cle-verte">
-      <span class="badge__label">Labellisé Clé Verte</span>
-    </div>
-  </div>
-</section>
+/* ================= ANIMATION DE L'IMAGE D'ACCUEIL ================= */
+@keyframes heroZoom {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
 
+.hero__bg {
+  animation: heroZoom 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* ================= AMÉLIORATION GLOBALE DU HERO ================= */
+.hero__scrim {
+  background: linear-gradient(
+    180deg, 
+    rgba(15, 25, 32, 0.75) 0%, 
+    rgba(15, 25, 32, 0.35) 40%, 
+    rgba(15, 25, 32, 0.88) 100%
+  ) !important;
+}
+
+/* ================= ADAPTATION SMARTPHONE (MOBILE) ================= */
+@media (max-width: 768px) {
+  /* Menu du haut : Logo plus grand & visible */
+  .nav {
+    background: rgba(15, 25, 32, 0.65) !important;
+    backdrop-filter: blur(8px);
+    padding: 0.8rem 0 !important;
+  }
+  
+  .nav__logo {
+    font-size: 1.55rem !important;
+    font-weight: 700 !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  }
+
+  .btn--nav {
+    padding: 0.45rem 0.9rem !important;
+    font-size: 0.82rem !important;
+  }
+
+  /* Structure de l'écran d'accueil */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 5rem;
+    text-align: center; /* Centrage pour un bel équilibre visuel */
+  }
+
+  /* Badges 4 étoiles & Clé Verte en haut à droite */
+  .hero__badges {
+    position: absolute !important;
+    top: 5rem !important;
+    right: 1rem !important;
+    left: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    gap: 0.4rem !important;
+    z-index: 5;
+    padding: 0 !important;
+  }
+
+  .hero__badges .badge {
+    padding: 0.3rem 0.6rem !important;
+    font-size: 0.72rem !important;
+    background: rgba(247, 243, 234, 0.92) !important;
+    backdrop-filter: blur(6px);
+    border-radius: 6px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  .hero__badges .badge__stars {
+    font-size: 0.65rem !important;
+    margin-right: 0.2rem;
+  }
+
+  /* Contenu centré et espacé */
+  .hero__content {
+    width: 100% !important;
+    max-width: 480px !important;
+    margin: 0 auto !important;
+    padding: 1.5rem 1.4rem 2.8rem !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Lieu : bien blanc et net sur fond sombre */
+  .hero__content .eyebrow {
+    color: #ffffff !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    margin-bottom: 0.6rem !important;
+  }
+
+  /* Titre équilibré */
+  .hero__title {
+    font-size: 1.9rem !important;
+    line-height: 1.25 !important;
+    color: #ffffff !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    margin: 0 auto 0.9rem !important;
+    max-width: 90%;
+  }
+
+  /* Accroche */
+  .hero__sub {
+    font-size: 0.94rem !important;
+    line-height: 1.45 !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    margin: 0 auto 1.4rem !important;
+    max-width: 95%;
+  }
+
+  /* Boutons */
+  .hero__cta {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .hero__cta .btn {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+  }
+}
 <!-- ============ INTRO ============ -->
 <section class="intro">
   <div class="intro__inner">
