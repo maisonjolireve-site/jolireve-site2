@@ -49,39 +49,34 @@ function euros(n){ return CONFIG.currency.format(n); }
 /* ===========================================================
    GALERIE
    =========================================================== */
-const GALLERY = [
-  { src: "images/spa-hero.jpeg", cat: "spa", alt: "Spa de nage illuminé de guirlandes au crépuscule", size: "wide tall" },
-  { src: "images/exterieur-facade-jour.jpeg", cat: "exterieur", alt: "Façade en pierre de la grange, olivier et transats" },
-  { src: "images/exterieur-facade-soir.jpeg", cat: "exterieur", alt: "Entrée Jolirêve illuminée à la tombée du jour" },
-  { src: "images/exterieur-facade-1.jpeg", cat: "exterieur", alt: "Cour extérieure avec table conviviale et chaises colorées", size: "wide" },
-  { src: "images/spa-9.jpeg", cat: "spa", alt: "Spa de nage chauffé, vue large sur la cour" },
-  { src: "images/salon-mezzanine-1.jpeg", cat: "salon", alt: "Séjour cathédrale avec mezzanine et coin salon", size: "tall" },
-  { src: "images/cuisine-table.jpeg", cat: "cuisine", alt: "Cuisine ouverte et grande table en bois massif" },
-  { src: "images/chambre-1.jpeg", cat: "chambres", alt: "Chambre cosy avec tête de lit en fibres tressées" },
-  { src: "images/exterieur-table-guirlandes.jpeg", cat: "exterieur", alt: "Table dressée en extérieur sous les guirlandes multicolores", size: "wide" },
-  { src: "images/spa-13-rouge.jpeg", cat: "spa", alt: "Spa de nage en ambiance lumineuse rouge" },
-  { src: "images/salon-mezzanine-2.jpeg", cat: "salon", alt: "Salon cosy, canapé vert et fauteuils terracotta" },
-  { src: "images/salle-eau-vasque.jpeg", cat: "salle-eau", alt: "Salle d'eau, vasque design et miroir rond" },
-  { src: "images/chambre-2-tropical.jpeg", cat: "chambres", alt: "Chambre au papier peint tropical bleu, deux lits", size: "tall" },
-  { src: "images/exterieur-babyfoot.jpeg", cat: "exterieur", alt: "Baby-foot sous l'ancienne cheminée en pierre" },
-  { src: "images/spa-4-vert.jpeg", cat: "spa", alt: "Spa de nage en ambiance verte" },
-  { src: "images/cuisine-detail.jpeg", cat: "cuisine", alt: "Détail de la cuisine, étagère et petit électroménager" },
-  { src: "images/chambre-dortoir-lits-superposes.jpeg", cat: "chambres", alt: "Dortoir familial, lits superposés design", size: "wide" },
-  { src: "images/exterieur-table-soir-1.jpeg", cat: "exterieur", alt: "Dîner en extérieur à la lueur du soir" },
-  { src: "images/salle-eau-douche-italienne.jpeg", cat: "salle-eau", alt: "Douche italienne en pierre grise" },
-  { src: "images/salon-mezzanine-4.jpeg", cat: "salon", alt: "Vue du séjour depuis le canapé, mezzanine en fond" },
-  { src: "images/spa-8-violet.jpeg", cat: "spa", alt: "Spa de nage en ambiance violette" },
-  { src: "images/exterieur-brasero.jpeg", cat: "exterieur", alt: "Coin brasero et table du repas extérieur" },
-  { src: "images/cuisine-vaisselle.jpeg", cat: "cuisine", alt: "Vaisselle et verrerie rangées dans la cuisine" },
-  { src: "images/salle-eau-dortoir.jpeg", cat: "salle-eau", alt: "Salle d'eau attenante au dortoir, lumière zénithale" },
-  { src: "images/exterieur-olivier.jpeg", cat: "exterieur", alt: "Coin détente autour de l'olivier centenaire" },
-  { src: "images/spa-5-jets.jpeg", cat: "spa", alt: "Jets du spa de nage en gros plan" },
-  { src: "images/salon-mezzanine-6.jpeg", cat: "salon", alt: "Salon vu depuis l'escalier de la mezzanine" },
-  { src: "images/exterieur-transats.jpeg", cat: "exterieur", alt: "Transats en bois au coucher du soleil" },
-  { src: "images/spa-14-bleu.jpeg", cat: "spa", alt: "Spa de nage en ambiance bleue profonde" },
-  { src: "images/cuisine-table-2.jpeg", cat: "cuisine", alt: "Grande table de la cuisine dressée pour un repas" },
-  { src: "images/exterieur-table-soir-3.jpeg", cat: "exterieur", alt: "Table dressée avec vaisselle et bougies au crépuscule" },
-  { src: "images/salon-mezzanine-8.jpeg", cat: "salon", alt: "Séjour cathédrale, vue d'ensemble avec mezzanine" }
+const GALERIE_PHOTOS = [
+  // Extérieur & Détente
+  { src: "images/spa-hero.jpeg", category: "exterieur", alt: "Cour en pierre et spa illuminé au crépuscule" },
+  { src: "images/exterieur-table-soir-1.jpeg", category: "exterieur", alt: "Table dressée dehors sous les guirlandes lumineuses" },
+  { src: "images/exterieur-brasero.jpeg", category: "exterieur", alt: "Espace brasero convivial dans la cour close" },
+  { src: "images/exterieur-transats.jpeg", category: "exterieur", alt: "Espace transats et détente au soleil" },
+  { src: "images/exterieur-babyfoot.jpeg", category: "exterieur", alt: "Baby-foot extérieur sous le préau" },
+
+  // Spa de nage
+  { src: "images/spa-10.jpeg", category: "spa", alt: "Grand spa de nage chauffé avec vue d'ensemble" },
+  { src: "images/spa-5-jets.jpeg", category: "spa", alt: "Jets de massage et nage à contre-courant" },
+  { src: "images/spa-14-bleu.jpeg", category: "spa", alt: "Ambiance nocturne éclairage LED bleu du spa" },
+
+  // Séjour / Salon
+  { src: "images/salon-mezzanine-1.jpeg", category: "salon", alt: "Grand séjour lumineux avec poutres apparentes" },
+  { src: "images/salon-mezzanine-2.jpeg", category: "salon", alt: "Espace salon détente sur la mezzanine" },
+
+  // Cuisine & Repas
+  { src: "images/cuisine-table.jpeg", category: "cuisine", alt: "Grande table en chêne conviviale" },
+  { src: "images/cuisine-3.jpeg", category: "cuisine", alt: "Piano de cuisson et cuisine équipée" },
+  { src: "images/cuisine-detail.jpeg", category: "cuisine", alt: "Détails et vaisselle de caractère" },
+
+  // Chambres & Salles d'eau
+  { src: "images/chambre-1.jpeg", category: "chambres", alt: "Chambre parentale lumineuse et soignée" },
+  { src: "images/chambre-2-tropical.jpeg", category: "chambres", alt: "Chambre double décoration chaleureuse" },
+  { src: "images/chambre-dortoir-lits-superposes.jpeg", category: "chambres", alt: "Dortoir familial avec lits superposés" },
+  { src: "images/salle-eau-douche-italienne.jpeg", category: "salle-eau", alt: "Salle d'eau moderne avec douche à l'italienne" },
+  { src: "images/salle-eau-vasque.jpeg", category: "salle-eau", alt: "Meuble vasque et finitions soignées" }
 ];
 
 function renderGallery(filter = "all"){
