@@ -613,3 +613,54 @@ h1, h2, h3, h4{
     padding: 0.85rem 1rem;
   }
 }
+/* --- CORRECTION AFFICHAGE MOBILE --- */
+@media (max-width: 640px) {
+  /* Évite le chevauchement avec le menu du haut */
+  .hero {
+    min-height: 100svh;
+    padding-top: 5.5rem;
+    align-items: center;
+  }
+  
+  .hero__content {
+    padding: 1rem 1.2rem 3rem !important;
+    margin: 0 auto !important;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem !important;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.6rem !important;
+  }
+
+  /* Titre proportionné sans retours forcés */
+  .hero__title {
+    font-size: 1.75rem !important;
+    line-height: 1.22 !important;
+    margin-bottom: 0.9rem !important;
+  }
+  
+  .hero__title br {
+    display: none !important;
+  }
+
+  /* Texte descriptif aéré et lisible */
+  .hero__sub {
+    font-size: 0.92rem !important;
+    line-height: 1.45 !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  /* Boutons d'action adaptés au pouce */
+  .hero__cta {
+    flex-direction: column;
+    gap: 0.7rem;
+    width: 100%;
+  }
+
+  .hero__cta .btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.85rem 1rem;
+  }
+}
