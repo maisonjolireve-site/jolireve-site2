@@ -49,7 +49,6 @@ function euros(n){ return CONFIG.currency.format(n); }
    =========================================================== */
 const GALERIE_PHOTOS = [
   // Extérieur & Détente
-  { src: "images/spa-hero.jpeg", category: "exterieur", alt: "Cour en pierre et spa illuminé au crépuscule" },
   { src: "images/exterieur-table-soir-1.jpeg", category: "exterieur", alt: "Table dressée dehors sous les guirlandes lumineuses" },
   { src: "images/exterieur-brasero.jpeg", category: "exterieur", alt: "Espace brasero convivial dans la cour close" },
   { src: "images/exterieur-transats.jpeg", category: "exterieur", alt: "Espace transats et détente au soleil" },
@@ -62,12 +61,9 @@ const GALERIE_PHOTOS = [
 
   // Séjour / Salon
   { src: "images/salon-mezzanine-1.jpeg", category: "salon", alt: "Grand séjour lumineux avec poutres apparentes" },
-  { src: "images/salon-mezzanine-2.jpeg", category: "salon", alt: "Espace salon détente sur la mezzanine" },
 
   // Cuisine & Repas
   { src: "images/cuisine-table.jpeg", category: "cuisine", alt: "Grande table en chêne conviviale" },
-  { src: "images/cuisine-3.jpeg", category: "cuisine", alt: "Piano de cuisson et cuisine équipée" },
-  { src: "images/cuisine-detail.jpeg", category: "cuisine", alt: "Détails et vaisselle de caractère" },
 
   // Chambres & Salles d'eau
   { src: "images/chambre-1.jpeg", category: "chambres", alt: "Chambre parentale lumineuse et soignée" },
