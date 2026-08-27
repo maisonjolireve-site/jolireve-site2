@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jolirêve — Grange de charme près du Futuroscope · Celle-Lévescault</title>
+<meta name="description" content="Grange en pierre rénovée avec spa de nage privatif, au cœur d'un hameau de la campagne poitevine. Hébergement 4 étoiles labellisé Clé Verte, à 35 min du Futuroscope. Réservez en ligne.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#accueil" class="nav__logo">Joli<span>rêve</span></a>
+    <nav class="nav__links">
+      <a href="#formules">Les formules</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#equipements">Équipements</a>
+      <a href="#avis">Avis</a>
+      <a href="#acces">Accès</a>
+    </nav>
+    <a href="#reservation" class="btn btn--nav">Réserver</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="accueil">
+  <img class="hero__bg" src="images/spa-hero.jpeg" alt="Spa de nage chauffé illuminé de guirlandes lumineuses, dans la cour en pierre de Jolirêve au crépuscule">
+  <div class="hero__scrim"></div>
+  <div class="hero__content">
+    <p class="eyebrow eyebrow--light">Celle-Lévescault · Nouvelle-Aquitaine</p>
+    <h1 class="hero__title">Le week-end<br>dont on parle<br>encore six mois après.</h1>
+    <p class="hero__sub">Une grange en pierre entièrement privatisée, son spa de nage chauffé et sa cour close, au cœur d'un hameau silencieux à 35 minutes du Futuroscope.</p>
+    <div class="hero__cta">
+      <a href="#reservation" class="btn btn--primary">Vérifier les disponibilités</a>
+      <a href="#galerie" class="btn btn--ghost">Voir les photos</a>
+    </div>
+  </div>
+  <div class="hero__badges">
+    <div class="badge">
+      <span class="badge__stars">★★★★</span>
+      <span class="badge__label">Classé Meublé de Tourisme</span>
+    </div>
+    <div class="badge badge--cle-verte">
+      <span class="badge__label">Labellisé Clé Verte</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTRO ============ -->
+<section class="intro">
+  <div class="intro__inner">
+    <p class="eyebrow">L'expérience Jolirêve</p>
+    <h2 class="intro__title">Vendredi 17h, le portail se referme.</h2>
+    <p class="intro__text">
+      La cour est à vous, rien qu'à vous. Les pierres encore chaudes de la journée. Quelqu'un branche le spa,
+      quelqu'un d'autre allume le brasero. Le lendemain matin, autour de la grande table en chêne, les enfants
+      ont déjà filé voir les ânes du voisin. Les adultes tiennent leur café à deux mains, sans agenda, sans bruit
+      — sinon celui, lointain et rare, d'un train qui passe.
+    </p>
+    <p class="intro__text">
+      Certains viennent se retrouver à deux. D'autres pour une retraite entre ami·e·s, ou une famille au complet
+      qui veut juste souffler. Jolirêve offre quelque chose de simple et de rare : une maison de caractère,
+      rien que pour vous.
+    </p>
+  </div>
+</section>
+
+<!-- ============ FORMULES ============ -->
+<section class="formules" id="formules">
+  <div class="section-head">
+    <p class="eyebrow">Deux façons de vivre Jolirêve</p>
+    <h2>Choisissez votre formule</h2>
+  </div>
+
+  <div class="formules__grid">
+
+    <article class="formule-card" data-formula="intime">
+      <div class="formule-card__img">
+        <img src="images/spa-2.jpeg" alt="Spa de nage privatif dans la cour close, ambiance intimiste">
+        <span class="formule-card__tag">Pour 2 à 6 personnes</span>
+      </div>
+      <div class="formule-card__body">
+        <h3>Version intime</h3>
+        <p>3 chambres, 2 salles d'eau. La grange dans sa configuration cosy : deux chambres à l'étage et,
+          si besoin, l'ouverture du dortoir pour accueillir jusqu'à 6 personnes.</p>
+        <ul class="formule-card__facts">
+          <li>Cour privative 200 m² · brasero · baby-foot</li>
+          <li>Spa de nage chauffé en option (réservation 7 j avant)</li>
+          <li>Cuisine équipée complète, linge inclus</li>
+        </ul>
+        <div class="formule-card__price">
+          <span class="price__from">à partir de</span>
+          <span class="price__amount">140 €</span>
+          <span class="price__unit">/ nuit en semaine</span>
+        </div>
+        <a href="#reservation" class="btn btn--secondary btn--block" onclick="Jolireve.selectFormula('intime')">Choisir cette formule</a>
+      </div>
+    </article>
+
+    <article class="formule-card formule-card--highlight" data-formula="grand">
+      <div class="formule-card__img">
+        <img src="images/spa-9.jpeg" alt="Spa de nage chauffé illuminé, vue large sur la cour et les guirlandes">
+        <span class="formule-card__tag">Jusqu'à 10 personnes</span>
+      </div>
+      <div class="formule-card__body">
+        <h3>Grand format</h3>
+        <p>3 chambres, 10 couchages, 2 salles d'eau. Le dortoir familial ouvert, le spa inclus dans le tarif —
+          la maison dans toute sa capacité, pour les grandes tablées.</p>
+        <ul class="formule-card__facts">
+          <li>Spa de nage chauffé <strong>inclus</strong> · 9 places</li>
+          <li>Dortoir 6 lits (80×200) + 2 chambres doubles à l'étage</li>
+          <li>Cour privative 200 m² · brasero · baby-foot</li>
+        </ul>
+        <div class="formule-card__price">
+          <span class="price__from">à partir de</span>
+          <span class="price__amount">380 €</span>
+          <span class="price__unit">/ nuit en semaine</span>
+        </div>
+        <a href="#reservation" class="btn btn--primary btn--block" onclick="Jolireve.selectFormula('grand')">Choisir cette formule</a>
+      </div>
+    </article>
+
+  </div>
+  <p class="formules__note">Week-end clé en main : arrivée vendredi 17h, départ dimanche 17h. Semaine : arrivée 17h, départ 11h.</p>
+</section>
+
+<!-- ============ GALERIE ============ -->
+<section class="galerie" id="galerie">
+  <div class="section-head">
+    <p class="eyebrow">Un aperçu des lieux</p>
+    <h2>La grange, pièce par pièce</h2>
+  </div>
+
+  <div class="galerie__filters">
+    <button class="filtre active" data-filter="all">Tout</button>
+    <button class="filtre" data-filter="exterieur">Extérieur</button>
+    <button class="filtre" data-filter="spa">Spa</button>
+    <button class="filtre" data-filter="salon">Séjour</button>
+    <button class="filtre" data-filter="cuisine">Cuisine</button>
+    <button class="filtre" data-filter="chambres">Chambres</button>
+    <button class="filtre" data-filter="salle-eau">Salles d'eau</button>
+  </div>
+
+  <div class="galerie__grid" id="galerieGrid">
+    <!-- rempli par script.js -->
+  </div>
+</section>
+
+<!-- ============ ÉQUIPEMENTS ============ -->
+<section class="equipements" id="equipements">
+  <div class="section-head">
+    <p class="eyebrow">Tout est prévu</p>
+    <h2>Équipements & services</h2>
+  </div>
+  <div class="equip__grid">
+    <div class="equip__item"><span class="equip__ico">🏊</span><h4>Spa de nage chauffé</h4><p>30°C toute l'année, jets de massage, nage à contre-courant</p></div>
+    <div class="equip__item"><span class="equip__ico">🔥</span><h4>Cour close 200 m²</h4><p>Barbecue, plancha, brasero, espace repas extérieur</p></div>
+    <div class="equip__item"><span class="equip__ico">🍳</span><h4>Cuisine de caractère</h4><p>Piano de cuisson pro, 2 fours, lave-vaisselle, lave-linge</p></div>
+    <div class="equip__item"><span class="equip__ico">🎯</span><h4>Baby-foot & jeux</h4><p>Baby-foot pro, badminton, fléchettes, mikado géant</p></div>
+    <div class="equip__item"><span class="equip__ico">🐴</span><h4>Ânes & cheval</h4><p>Une présence douce sur la propriété, à deux pas</p></div>
+    <div class="equip__item"><span class="equip__ico">🔑</span><h4>Arrivée autonome</h4><p>Boîte à clés sécurisée ou accueil personnalisé</p></div>
+    <div class="equip__item"><span class="equip__ico">📶</span><h4>Wifi & espace travail</h4><p>Connexion fibre, coin bureau dédié</p></div>
+    <div class="equip__item"><span class="equip__ico">🅿️</span><h4>Stationnement gratuit</h4><p>Dépose-minute adaptée PMR devant la maison</p></div>
+  </div>
+
+  <div class="cle-verte">
+    <div class="cle-verte__badge">🌍</div>
+    <div class="cle-verte__text">
+      <h3>Un séjour écoresponsable</h3>
+      <p>Jolirêve est labellisé <strong>Clé Verte</strong> : compost, tri sélectif, produits d'entretien
+        écologiques, circuits vélo et producteurs locaux mis en avant. Un charme d'hier, une conscience
+        d'aujourd'hui.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AVIS ============ -->
+<section class="avis" id="avis">
+  <div class="section-head">
+    <p class="eyebrow">Ce que vivent les voyageurs</p>
+    <h2>4,9 / 5 sur les derniers séjours</h2>
+  </div>
+  <div class="avis__stats">
+    <div class="avis__stat"><span>5,0</span>Propreté</div>
+    <div class="avis__stat"><span>4,9</span>Précision</div>
+    <div class="avis__stat"><span>4,9</span>Arrivée</div>
+    <div class="avis__stat"><span>4,8</span>Communication</div>
+  </div>
+  <div class="avis__grid">
+    <blockquote class="avis__card">
+      <p>Un cadre exceptionnel, le spa en pleine nature était un vrai bonus pour se détendre en famille.</p>
+      <cite>Séjour en famille</cite>
+    </blockquote>
+    <blockquote class="avis__card">
+      <p>La cour privatisée et le silence du hameau nous ont permis de vraiment déconnecter le temps d'un week-end.</p>
+      <cite>Escapade entre amis</cite>
+    </blockquote>
+    <blockquote class="avis__card">
+      <p>Accueil autonome très pratique, maison impeccable et décoration pleine de charme. On reviendra.</p>
+      <cite>Séjour en couple</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ============ RÉSERVATION ============ -->
+<section class="reservation" id="reservation">
+  <div class="section-head">
+    <p class="eyebrow eyebrow--light">Dernière étape</p>
+    <h2 class="light">Vérifiez, choisissez, c'est réservé</h2>
+    <p class="reservation__intro">Sélectionnez vos dates, l'acompte de 30 % se calcule automatiquement. Le solde est réglé sur place.</p>
+  </div>
+
+  <div class="booking">
+    <!-- Colonne gauche : formule + calendrier -->
+    <div class="booking__left">
+      <div class="booking__formula-select">
+        <label class="formula-radio">
+          <input type="radio" name="formula" value="intime" checked>
+          <span class="formula-radio__box">
+            <strong>Version intime</strong>
+            <small>2 à 6 personnes</small>
+          </span>
+        </label>
+        <label class="formula-radio">
+          <input type="radio" name="formula" value="grand">
+          <span class="formula-radio__box">
+            <strong>Grand format</strong>
+            <small>Jusqu'à 10 personnes</small>
+          </span>
+        </label>
+      </div>
+
+      <div class="calendar-card">
+        <div class="calendar-card__header">
+          <button type="button" id="calPrev" aria-label="Mois précédent">‹</button>
+          <h3 id="calMonthLabel"></h3>
+          <button type="button" id="calNext" aria-label="Mois suivant">›</button>
+        </div>
+        <div class="calendar-card__weekdays">
+          <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
+        </div>
+        <div class="calendar-card__grid" id="calGrid"></div>
+        <div class="calendar-card__legend">
+          <span><i class="dot dot--free"></i> Libre</span>
+          <span><i class="dot dot--selected"></i> Sélectionné</span>
+          <span><i class="dot dot--booked"></i> Indisponible</span>
+        </div>
+      </div>
+
+      <label class="spa-option" id="spaOptionWrap">
+        <input type="checkbox" id="spaOption">
+        <span>Ajouter le spa de nage privatif en option <em id="spaOptionPrice"></em></span>
+      </label>
+    </div>
+
+    <!-- Colonne droite : récap + formulaire -->
+    <div class="booking__right">
+      <div class="recap-card">
+        <h3>Votre séjour</h3>
+        <div class="recap-line"><span>Formule</span><strong id="recapFormula">Version intime</strong></div>
+        <div class="recap-line"><span>Arrivée</span><strong id="recapCheckin">—</strong></div>
+        <div class="recap-line"><span>Départ</span><strong id="recapCheckout">—</strong></div>
+        <div class="recap-line"><span>Nuits</span><strong id="recapNights">—</strong></div>
+        <div class="recap-line"><span>Voyageurs</span>
+          <span class="stepper">
+            <button type="button" id="guestsMinus">−</button>
+            <strong id="recapGuests">2</strong>
+            <button type="button" id="guestsPlus">+</button>
+          </span>
+        </div>
+        <hr>
+        <div class="recap-line"><span>Ménage fin de séjour</span><strong id="recapCleaning">—</strong></div>
+        <div class="recap-line"><span>Total du séjour</span><strong id="recapTotal">—</strong></div>
+        <div class="recap-line recap-line--accent"><span>Acompte à régler (30 %)</span><strong id="recapDeposit">—</strong></div>
+        <p class="recap-note">Le solde restant, <strong id="recapBalance">—</strong>, est réglé sur place à l'arrivée.</p>
+
+        <form id="bookingForm" class="booking-form">
+          <label>Nom complet
+            <input type="text" name="name" required placeholder="Votre nom">
+          </label>
+          <label>E-mail
+            <input type="email" name="email" required placeholder="vous@exemple.fr">
+          </label>
+          <label>Téléphone
+            <input type="tel" name="phone" required placeholder="06 12 34 56 78">
+          </label>
+          <label>Message (optionnel)
+            <textarea name="message" rows="2" placeholder="Une précision sur votre arrivée, un besoin particulier…"></textarea>
+          </label>
+          <button type="submit" class="btn btn--primary btn--block btn--large" id="submitBtn">
+            Payer l'acompte et réserver
+          </button>
+          <p class="booking-form__secure">🔒 Paiement sécurisé par Stripe</p>
+          <p class="booking-form__error" id="bookingError"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACCÈS ============ -->
+<section class="acces" id="acces">
+  <div class="acces__inner">
+    <div class="acces__text">
+      <p class="eyebrow">Pour venir</p>
+      <h2>Au cœur de la campagne poitevine</h2>
+      <p>Celle-Lévescault, Nouvelle-Aquitaine. L'adresse exacte est communiquée après la réservation.</p>
+      <ul class="acces__list">
+        <li><strong>Poitiers</strong> — 20 min</li>
+        <li><strong>Futuroscope</strong> — 35 min</li>
+        <li><strong>Vallée des Singes</strong> — 30 min</li>
+        <li><strong>Marais Poitevin</strong> — 45 min</li>
+      </ul>
+    </div>
+    <div class="acces__map">
+      <iframe title="Localisation Celle-Lévescault" src="https://www.google.com/maps?q=Celle-L%C3%A9vescault,+France&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">Joli<span>rêve</span></div>
+    <div class="footer__links">
+      <a href="mailto:contact@jolireve.fr">contact@jolireve.fr</a>
+      <a href="#reservation">Réserver</a>
+      <a href="cgv.html">Conditions générales de vente</a>
+      <a href="mentions-legales.html">Mentions légales</a>
+    </div>
+    <p class="footer__copy">© <span id="year"></span> Jolirêve — Celle-Lévescault. Hébergement classé 4 étoiles, labellisé Clé Verte.</p>
+  </div>
+</footer>
+
+<!-- Lightbox galerie -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox__close" id="lightboxClose" aria-label="Fermer">✕</button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Précédent">‹</button>
+  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Suivant">›</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

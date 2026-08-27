@@ -1,0 +1,10 @@
+{
+  "name": "jolireve-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site vitrine et moteur de réservation du gîte Jolirêve",
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0",
+    "stripe": "^17.4.0"
+  }
+}

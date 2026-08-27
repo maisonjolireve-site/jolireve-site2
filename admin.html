@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jolirêve — Administration</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pierre-fond: #F7F3EA; --pierre-fonce: #3A342C; --nuit-spa: #16303F;
+    --guirlande: #D9A441; --rouge: #C1613F; --vert: #5B7553;
+  }
+  *{ box-sizing: border-box; }
+  body{ font-family: 'Inter', sans-serif; background: var(--pierre-fond); color: var(--pierre-fonce); margin:0; padding: 2rem 1.2rem; }
+  h1{ font-family: 'Fraunces', serif; color: var(--nuit-spa); font-size: 1.6rem; }
+  .wrap{ max-width: 760px; margin: 0 auto; }
+  .card{ background: #fff; border-radius: 12px; padding: 1.5rem; box-shadow: 0 6px 24px -8px rgba(22,48,63,.15); margin-bottom: 1.5rem; }
+  label{ display:block; font-size: .85rem; font-weight:600; margin-bottom: .3rem; }
+  input{ width:100%; padding: .6rem .7rem; border: 1.5px solid #ddd; border-radius: 8px; font-size: .95rem; margin-bottom: .9rem; }
+  button{ background: var(--rouge); color:#fff; border:none; padding: .7rem 1.3rem; border-radius: 999px; font-weight:600; cursor:pointer; }
+  button.secondary{ background: transparent; border: 1.5px solid var(--nuit-spa); color: var(--nuit-spa); }
+  button.danger{ background: #B23A2E; }
+  table{ width: 100%; border-collapse: collapse; font-size: .88rem; }
+  th, td{ text-align: left; padding: .55rem .5rem; border-bottom: 1px solid #eee; }
+  .status{ padding: .15rem .55rem; border-radius: 999px; font-size: .75rem; font-weight: 600; }
+  .status--confirmed{ background: #E9EFE4; color: var(--vert); }
+  .status--pending{ background: #FBF0DA; color: #A87B1E; }
+  .status--blocked{ background: #F0D9D3; color: #B23A2E; }
+  #loginScreen, #adminScreen{ display:none; }
+  .row{ display:flex; gap: 1rem; flex-wrap: wrap; align-items:end; }
+  .row > div{ flex: 1; min-width: 160px; }
+  .msg{ font-size: .85rem; color: var(--rouge); min-height: 1.2em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Jolirêve — Administration du calendrier</h1>
+
+  <div id="loginScreen" class="card">
+    <label>Mot de passe administrateur</label>
+    <input type="password" id="pwdInput" placeholder="•••••••••">
+    <button onclick="login()">Se connecter</button>
+    <p class="msg" id="loginMsg"></p>
+  </div>
+
+  <div id="adminScreen">
+    <div class="card">
+      <h2 style="font-size:1.1rem;margin-top:0;">Bloquer une période</h2>
+      <p style="font-size:.85rem;color:#6B5D4C;">Utilisez ceci pour un séjour personnel, des travaux, ou toute indisponibilité qui n'est pas une réservation payante.</p>
+      <div class="row">
+        <div><label>Du</label><input type="date" id="blockStart"></div>
+        <div><label>Au</label><input type="date" id="blockEnd"></div>
+        <div><label>Note (optionnelle)</label><input type="text" id="blockNote" placeholder="Ex : travaux toiture"></div>
+      </div>
+      <button onclick="blockDates()">Bloquer cette période</button>
+      <p class="msg" id="blockMsg"></p>
+    </div>
+
+    <div class="card">
+      <h2 style="font-size:1.1rem;margin-top:0;">Toutes les périodes enregistrées</h2>
+      <table id="rangesTable">
+        <thead><tr><th>Du</th><th>Au</th><th>Statut</th><th>Détails</th><th></th></tr></thead>
+        <tbody id="rangesBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+let ADMIN_PWD = "";
+
+function login(){
+  ADMIN_PWD = document.getElementById("pwdInput").value;
+  fetchRanges();
+}
+
+async function fetchRanges(){
+  const msg = document.getElementById("loginMsg");
+  try{
+    const res = await fetch("/.netlify/functions/admin-dates", {
+      headers: { "x-admin-password": ADMIN_PWD }
+    });
+    if (res.status === 401){ msg.textContent = "Mot de passe incorrect."; return; }
+    const data = await res.json();
+    document.getElementById("loginScreen").style.display = "none";
+    document.getElementById("adminScreen").style.display = "block";
+    renderRanges(data.ranges || []);
+  }catch(err){
+    msg.textContent = "Erreur de connexion. Réessayez.";
+  }
+}
+
+function renderRanges(ranges){
+  const body = document.getElementById("rangesBody");
+  body.innerHTML = "";
+  const labels = { confirmed: "Réservé (payé)", pending: "En cours de paiement", blocked: "Bloqué manuellement" };
+  ranges.slice().reverse().forEach((r) => {
+    const realIndex = ranges.indexOf(r);
+    const tr = document.createElement("tr");
+    const details = r.status === "confirmed"
+      ? `${r.name || ""} · ${r.guests || "?"} pers. · acompte ${r.deposit || "?"}€`
+      : (r.status === "blocked" ? (r.note || "—") : "Paiement en attente");
+    tr.innerHTML = `
+      <td>${r.start}</td><td>${r.end}</td>
+      <td><span class="status status--${r.status}">${labels[r.status] || r.status}</span></td>
+      <td>${details}</td>
+      <td><button class="danger" onclick="removeRange(${realIndex})">Retirer</button></td>
+    `;
+    body.appendChild(tr);
+  });
+}
+
+async function blockDates(){
+  const start = document.getElementById("blockStart").value;
+  const end = document.getElementById("blockEnd").value;
+  const note = document.getElementById("blockNote").value;
+  const msg = document.getElementById("blockMsg");
+  if (!start || !end){ msg.textContent = "Merci de renseigner les deux dates."; return; }
+  const res = await fetch("/.netlify/functions/admin-dates", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-admin-password": ADMIN_PWD },
+    body: JSON.stringify({ action: "block", start, end, note })
+  });
+  const data = await res.json();
+  if (!res.ok){ msg.textContent = data.error || "Erreur."; return; }
+  msg.textContent = "Période bloquée.";
+  renderRanges(data.ranges);
+}
+
+async function removeRange(index){
+  if (!confirm("Retirer cette période du calendrier ?")) return;
+  const res = await fetch("/.netlify/functions/admin-dates", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "x-admin-password": ADMIN_PWD },
+    body: JSON.stringify({ action: "remove-any", index })
+  });
+  const data = await res.json();
+  if (res.ok) renderRanges(data.ranges);
+}
+</script>
+</body>
+</html>
