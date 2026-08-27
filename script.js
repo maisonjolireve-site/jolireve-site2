@@ -5,12 +5,11 @@
    =========================================================== */
 
 const CONFIG = {
-  // Chemin des fonctions serveur (Netlify Functions).
-  // Ne pas modifier sauf changement d'hébergeur.
+  // Chemin des fonctions serveur (Netlify Functions)
   apiBase: "/.netlify/functions",
 
   depositRate: 0.30, // 30 % d'acompte
-  cleaningFee: 120, // ménage fin de séjour, comme sur l'annonce Airbnb
+  cleaningFee: 120, // ménage fin de séjour
 
   formulas: {
     intime: {
@@ -31,12 +30,11 @@ const CONFIG = {
     }
   },
 
-  // Tarif du spa en option (formule Intime uniquement), paliers par séjour
+  // Tarif du spa en option (formule Intime uniquement)
   spaPricing: [
     { nights: 2, price: 160 },
     { nights: 3, price: 210 },
-    { nights: 4, price: 240 },
-    // au-delà : 240 + 50 € par nuit supplémentaire
+    { nights: 4, price: 240 }
   ],
   spaExtraPerNight: 50,
 
@@ -47,7 +45,7 @@ const CONFIG = {
 function euros(n){ return CONFIG.currency.format(n); }
 
 /* ===========================================================
-   GALERIE
+   GALERIE PHOTOS
    =========================================================== */
 const GALERIE_PHOTOS = [
   // Extérieur & Détente
@@ -79,13 +77,19 @@ const GALERIE_PHOTOS = [
   { src: "images/salle-eau-vasque.jpeg", category: "salle-eau", alt: "Meuble vasque et finitions soignées" }
 ];
 
+let lightboxItems = [];
+let lightboxIndex = 0;
+
 function renderGallery(filter = "all"){
   const grid = document.getElementById("galerieGrid");
+  if (!grid) return;
   grid.innerHTML = "";
-  const items = GALLERY.filter(g => filter === "all" || g.cat === filter);
+  
+  const items = GALERIE_PHOTOS.filter(g => filter === "all" || g.category === filter);
+  
   items.forEach((g, i) => {
     const div = document.createElement("div");
-    div.className = "g-item" + (g.size ? " " + g.size : "");
+    div.className = "g-item";
     const img = document.createElement("img");
     img.src = g.src;
     img.alt = g.alt;
@@ -96,39 +100,59 @@ function renderGallery(filter = "all"){
   });
 }
 
-let lightboxItems = [];
-let lightboxIndex = 0;
 function openLightbox(items, index){
   lightboxItems = items;
   lightboxIndex = index;
   updateLightbox();
-  document.getElementById("lightbox").classList.add("open");
+  const lb = document.getElementById("lightbox");
+  if (lb) lb.classList.add("active");
 }
+
 function updateLightbox(){
   const item = lightboxItems[lightboxIndex];
   const img = document.getElementById("lightboxImg");
-  img.src = item.src;
-  img.alt = item.alt;
+  if (img && item) {
+    img.src = item.src;
+    img.alt = item.alt;
+  }
 }
-document.getElementById("lightboxClose").addEventListener("click", () => {
-  document.getElementById("lightbox").classList.remove("open");
-});
-document.getElementById("lightbox").addEventListener("click", (e) => {
-  if (e.target.id === "lightbox") document.getElementById("lightbox").classList.remove("open");
-});
-document.getElementById("lightboxPrev").addEventListener("click", () => {
-  lightboxIndex = (lightboxIndex - 1 + lightboxItems.length) % lightboxItems.length;
-  updateLightbox();
-});
-document.getElementById("lightboxNext").addEventListener("click", () => {
-  lightboxIndex = (lightboxIndex + 1) % lightboxItems.length;
-  updateLightbox();
-});
+
+const lbClose = document.getElementById("lightboxClose");
+if (lbClose) {
+  lbClose.addEventListener("click", () => {
+    document.getElementById("lightbox").classList.remove("active");
+  });
+}
+
+const lb = document.getElementById("lightbox");
+if (lb) {
+  lb.addEventListener("click", (e) => {
+    if (e.target.id === "lightbox") lb.classList.remove("active");
+  });
+}
+
+const lbPrev = document.getElementById("lightboxPrev");
+if (lbPrev) {
+  lbPrev.addEventListener("click", () => {
+    lightboxIndex = (lightboxIndex - 1 + lightboxItems.length) % lightboxItems.length;
+    updateLightbox();
+  });
+}
+
+const lbNext = document.getElementById("lightboxNext");
+if (lbNext) {
+  lbNext.addEventListener("click", () => {
+    lightboxIndex = (lightboxIndex + 1) % lightboxItems.length;
+    updateLightbox();
+  });
+}
+
 document.addEventListener("keydown", (e) => {
-  if (!document.getElementById("lightbox").classList.contains("open")) return;
-  if (e.key === "Escape") document.getElementById("lightbox").classList.remove("open");
-  if (e.key === "ArrowLeft") document.getElementById("lightboxPrev").click();
-  if (e.key === "ArrowRight") document.getElementById("lightboxNext").click();
+  const lbEl = document.getElementById("lightbox");
+  if (!lbEl || !lbEl.classList.contains("active")) return;
+  if (e.key === "Escape") lbEl.classList.remove("active");
+  if (e.key === "ArrowLeft" && lbPrev) lbPrev.click();
+  if (e.key === "ArrowRight" && lbNext) lbNext.click();
 });
 
 document.querySelectorAll(".filtre").forEach(btn => {
@@ -139,15 +163,15 @@ document.querySelectorAll(".filtre").forEach(btn => {
   });
 });
 
-renderGallery();
-
 /* ===========================================================
    NAVIGATION — effet au scroll
    =========================================================== */
 const nav = document.getElementById("nav");
-window.addEventListener("scroll", () => {
-  nav.classList.toggle("scrolled", window.scrollY > 60);
-});
+if (nav) {
+  window.addEventListener("scroll", () => {
+    nav.classList.toggle("scrolled", window.scrollY > 60);
+  });
+}
 
 /* ===========================================================
    CALENDRIER DE RÉSERVATION
@@ -155,10 +179,10 @@ window.addEventListener("scroll", () => {
 const state = {
   formula: "intime",
   guests: 2,
-  checkin: null,   // Date
-  checkout: null,  // Date
+  checkin: null,
+  checkout: null,
   spaOption: false,
-  bookedRanges: [], // [{start: 'YYYY-MM-DD', end: 'YYYY-MM-DD'}, ...] récupéré depuis le serveur
+  bookedRanges: [],
   viewMonth: new Date().getMonth(),
   viewYear: new Date().getFullYear()
 };
@@ -173,28 +197,27 @@ function isDateBooked(date){
 async function loadAvailability(){
   try{
     const res = await fetch(`${CONFIG.apiBase}/availability?formula=${state.formula}`);
-    if (!res.ok) throw new Error("Réponse serveur invalide");
+    if (!res.ok) throw new Error("Réponse serveur");
     const data = await res.json();
     state.bookedRanges = data.booked || [];
   }catch(err){
-    // En l'absence du backend (site testé en local avant déploiement),
-    // le calendrier reste utilisable mais sans blocage des dates déjà prises.
-    console.warn("Disponibilités indisponibles pour le moment :", err.message);
     state.bookedRanges = [];
   }
   renderCalendar();
 }
 
-const MONTHS_FR = ["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+const MONTHS_FR = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
 
 function renderCalendar(){
   const grid = document.getElementById("calGrid");
   const label = document.getElementById("calMonthLabel");
+  if (!grid || !label) return;
+
   grid.innerHTML = "";
   label.textContent = `${MONTHS_FR[state.viewMonth]} ${state.viewYear}`;
 
   const first = new Date(state.viewYear, state.viewMonth, 1);
-  const startOffset = (first.getDay() + 6) % 7; // lundi = 0
+  const startOffset = (first.getDay() + 6) % 7;
   const daysInMonth = new Date(state.viewYear, state.viewMonth + 1, 0).getDate();
   const today = new Date(); today.setHours(0,0,0,0);
 
@@ -216,9 +239,12 @@ function renderCalendar(){
     const isSelectedEnd = state.checkout && toISO(date) === toISO(state.checkout);
     const isInRange = state.checkin && state.checkout && date > state.checkin && date < state.checkout;
 
-    if (isPast) cell.classList.add("cal-day--past");
+    if (isPast) cell.classList.add("cal-day--booked");
     else if (isBooked) cell.classList.add("cal-day--booked");
-    else cell.addEventListener("click", () => onDayClick(date));
+    else {
+      cell.classList.add("cal-day--free");
+      cell.addEventListener("click", () => onDayClick(date));
+    }
 
     if (isSelectedStart || isSelectedEnd) cell.classList.add("cal-day--selected");
     else if (isInRange) cell.classList.add("cal-day--in-range");
@@ -229,7 +255,6 @@ function renderCalendar(){
 
 function onDayClick(date){
   if (!state.checkin || (state.checkin && state.checkout)){
-    // nouvelle sélection
     state.checkin = date;
     state.checkout = null;
   } else {
@@ -237,7 +262,6 @@ function onDayClick(date){
       state.checkin = date;
       state.checkout = null;
     } else {
-      // vérifier qu'aucune date réservée n'est comprise dans l'intervalle choisi
       let conflict = false;
       const cursor = new Date(state.checkin);
       while (cursor < date){
@@ -245,7 +269,7 @@ function onDayClick(date){
         cursor.setDate(cursor.getDate() + 1);
       }
       if (conflict){
-        alert("Certaines dates de cette période sont déjà réservées. Merci de choisir un autre intervalle.");
+        alert("Certaines dates de cette période sont déjà réservées. Merci de choisir un autre créneau.");
         state.checkin = date;
         state.checkout = null;
       } else {
@@ -257,16 +281,23 @@ function onDayClick(date){
   updateRecap();
 }
 
-document.getElementById("calPrev").addEventListener("click", () => {
-  state.viewMonth--;
-  if (state.viewMonth < 0){ state.viewMonth = 11; state.viewYear--; }
-  renderCalendar();
-});
-document.getElementById("calNext").addEventListener("click", () => {
-  state.viewMonth++;
-  if (state.viewMonth > 11){ state.viewMonth = 0; state.viewYear++; }
-  renderCalendar();
-});
+const calPrev = document.getElementById("calPrev");
+if (calPrev) {
+  calPrev.addEventListener("click", () => {
+    state.viewMonth--;
+    if (state.viewMonth < 0){ state.viewMonth = 11; state.viewYear--; }
+    renderCalendar();
+  });
+}
+
+const calNext = document.getElementById("calNext");
+if (calNext) {
+  calNext.addEventListener("click", () => {
+    state.viewMonth++;
+    if (state.viewMonth > 11){ state.viewMonth = 0; state.viewYear++; }
+    renderCalendar();
+  });
+}
 
 /* ===========================================================
    FORMULE / VOYAGEURS / OPTION SPA
@@ -276,7 +307,8 @@ document.querySelectorAll('input[name="formula"]').forEach(radio => {
     state.formula = e.target.value;
     const f = CONFIG.formulas[state.formula];
     if (state.guests > f.maxGuests) state.guests = f.maxGuests;
-    document.getElementById("spaOptionWrap").style.display = f.spaIncluded ? "none" : "flex";
+    const wrap = document.getElementById("spaOptionWrap");
+    if (wrap) wrap.style.display = f.spaIncluded ? "none" : "flex";
     loadAvailability();
     updateRecap();
   });
@@ -285,23 +317,34 @@ document.querySelectorAll('input[name="formula"]').forEach(radio => {
 function selectFormula(key){
   const input = document.querySelector(`input[name="formula"][value="${key}"]`);
   if (input){ input.checked = true; input.dispatchEvent(new Event("change")); }
-  document.getElementById("reservation").scrollIntoView({ behavior: "smooth" });
+  const resSection = document.getElementById("reservation");
+  if (resSection) resSection.scrollIntoView({ behavior: "smooth" });
 }
 
-document.getElementById("guestsMinus").addEventListener("click", () => {
-  const f = CONFIG.formulas[state.formula];
-  if (state.guests > f.minGuests){ state.guests--; updateRecap(); }
-});
-document.getElementById("guestsPlus").addEventListener("click", () => {
-  const f = CONFIG.formulas[state.formula];
-  if (state.guests < f.maxGuests){ state.guests++; updateRecap(); }
-  else alert(`Cette formule accueille au maximum ${f.maxGuests} personnes.`);
-});
+const gMinus = document.getElementById("guestsMinus");
+if (gMinus) {
+  gMinus.addEventListener("click", () => {
+    const f = CONFIG.formulas[state.formula];
+    if (state.guests > f.minGuests){ state.guests--; updateRecap(); }
+  });
+}
 
-document.getElementById("spaOption").addEventListener("change", (e) => {
-  state.spaOption = e.target.checked;
-  updateRecap();
-});
+const gPlus = document.getElementById("guestsPlus");
+if (gPlus) {
+  gPlus.addEventListener("click", () => {
+    const f = CONFIG.formulas[state.formula];
+    if (state.guests < f.maxGuests){ state.guests++; updateRecap(); }
+    else alert(`Cette formule accueille au maximum ${f.maxGuests} personnes.`);
+  });
+}
+
+const spaOpt = document.getElementById("spaOption");
+if (spaOpt) {
+  spaOpt.addEventListener("change", (e) => {
+    state.spaOption = e.target.checked;
+    updateRecap();
+  });
+}
 
 /* ===========================================================
    CALCUL DU PRIX
@@ -315,8 +358,8 @@ function computeStayPrice(checkin, checkout, formulaKey){
   let total = 0;
   const cursor = new Date(checkin);
   while (cursor < checkout){
-    const day = cursor.getDay(); // 0 = dimanche ... 5 = vendredi, 6 = samedi
-    const isWeekendNight = (day === 5 || day === 6); // nuit de vendredi ou samedi
+    const day = cursor.getDay();
+    const isWeekendNight = (day === 5 || day === 6);
     total += isWeekendNight ? f.priceWeekend : f.priceWeekday;
     cursor.setDate(cursor.getDate() + 1);
   }
@@ -324,7 +367,7 @@ function computeStayPrice(checkin, checkout, formulaKey){
 }
 
 function computeSpaPrice(nights){
-  if (nights <= 1) return CONFIG.spaPricing[0].price; // minimum applicable
+  if (nights <= 1) return CONFIG.spaPricing[0].price;
   const tier = CONFIG.spaPricing.find(t => t.nights === nights);
   if (tier) return tier.price;
   if (nights > 4){
@@ -332,104 +375,124 @@ function computeSpaPrice(nights){
     const extraNights = nights - 4;
     return base + extraNights * CONFIG.spaExtraPerNight;
   }
-  // nights === 1 fallback déjà couvert plus haut
   return CONFIG.spaPricing[0].price;
 }
 
 function updateRecap(){
   const f = CONFIG.formulas[state.formula];
-  document.getElementById("recapFormula").textContent = f.label;
-  document.getElementById("recapGuests").textContent = state.guests;
-  document.getElementById("recapCheckin").textContent = state.checkin ? state.checkin.toLocaleDateString("fr-FR") : "—";
-  document.getElementById("recapCheckout").textContent = state.checkout ? state.checkout.toLocaleDateString("fr-FR") : "—";
-
+  const rForm = document.getElementById("recapFormula");
+  const rGuests = document.getElementById("recapGuests");
+  const rIn = document.getElementById("recapCheckin");
+  const rOut = document.getElementById("recapCheckout");
+  const rNights = document.getElementById("recapNights");
+  const rClean = document.getElementById("recapCleaning");
+  const rTot = document.getElementById("recapTotal");
+  const rDep = document.getElementById("recapDeposit");
+  const rBal = document.getElementById("recapBalance");
   const spaLabel = document.getElementById("spaOptionPrice");
+  const submitBtn = document.getElementById("submitBtn");
+
+  if (rForm) rForm.textContent = f.label;
+  if (rGuests) rGuests.textContent = state.guests;
+  if (rIn) rIn.textContent = state.checkin ? state.checkin.toLocaleDateString("fr-FR") : "—";
+  if (rOut) rOut.textContent = state.checkout ? state.checkout.toLocaleDateString("fr-FR") : "—";
 
   if (!state.checkin || !state.checkout){
-    document.getElementById("recapNights").textContent = "—";
-    document.getElementById("recapCleaning").textContent = "—";
-    document.getElementById("recapTotal").textContent = "—";
-    document.getElementById("recapDeposit").textContent = "—";
-    document.getElementById("recapBalance").textContent = "—";
-    spaLabel.textContent = "";
-    document.getElementById("submitBtn").disabled = true;
+    if (rNights) rNights.textContent = "—";
+    if (rClean) rClean.textContent = "—";
+    if (rTot) rTot.textContent = "—";
+    if (rDep) rDep.textContent = "—";
+    if (rBal) rBal.textContent = "—";
+    if (spaLabel) spaLabel.textContent = "";
+    if (submitBtn) submitBtn.disabled = true;
     return;
   }
 
   const nights = countNights(state.checkin, state.checkout);
-  document.getElementById("recapNights").textContent = nights;
+  if (rNights) rNights.textContent = `${nights} nuit${nights > 1 ? "s" : ""}`;
 
   let stayTotal = computeStayPrice(state.checkin, state.checkout, state.formula);
 
   if (!f.spaIncluded){
     const spaPrice = computeSpaPrice(nights);
-    spaLabel.textContent = `(+ ${euros(spaPrice)} pour ${nights} nuit${nights>1?"s":""})`;
+    if (spaLabel) spaLabel.textContent = `(+ ${euros(spaPrice)} pour ${nights} nuit${nights > 1 ? "s" : ""})`;
     if (state.spaOption) stayTotal += spaPrice;
   } else {
-    spaLabel.textContent = "";
+    if (spaLabel) spaLabel.textContent = "";
   }
 
   const total = stayTotal + CONFIG.cleaningFee;
   const deposit = Math.round(total * CONFIG.depositRate);
   const balance = total - deposit;
 
-  document.getElementById("recapCleaning").textContent = euros(CONFIG.cleaningFee);
-  document.getElementById("recapTotal").textContent = euros(total);
-  document.getElementById("recapDeposit").textContent = euros(deposit);
-  document.getElementById("recapBalance").textContent = euros(balance);
-  document.getElementById("submitBtn").disabled = false;
+  if (rClean) rClean.textContent = euros(CONFIG.cleaningFee);
+  if (rTot) rTot.textContent = euros(total);
+  if (rDep) rDep.textContent = euros(deposit);
+  if (rBal) rBal.textContent = euros(balance);
+  if (submitBtn) submitBtn.disabled = false;
 }
 
 /* ===========================================================
    ENVOI DE LA RÉSERVATION → STRIPE CHECKOUT
    =========================================================== */
-document.getElementById("bookingForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const errorEl = document.getElementById("bookingError");
-  errorEl.textContent = "";
+const bForm = document.getElementById("bookingForm");
+if (bForm) {
+  bForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const errorEl = document.getElementById("bookingError");
+    if (errorEl) errorEl.textContent = "";
 
-  if (!state.checkin || !state.checkout){
-    errorEl.textContent = "Merci de sélectionner vos dates de séjour.";
-    return;
-  }
+    if (!state.checkin || !state.checkout){
+      if (errorEl) errorEl.textContent = "Merci de sélectionner vos dates de séjour.";
+      return;
+    }
 
-  const formData = new FormData(e.target);
-  const payload = {
-    formula: state.formula,
-    checkin: toISO(state.checkin),
-    checkout: toISO(state.checkout),
-    guests: state.guests,
-    spaOption: state.spaOption,
-    name: formData.get("name"),
-    email: formData.get("email"),
-    phone: formData.get("phone"),
-    message: formData.get("message")
-  };
+    const formData = new FormData(e.target);
+    const payload = {
+      formula: state.formula,
+      checkin: toISO(state.checkin),
+      checkout: toISO(state.checkout),
+      guests: state.guests,
+      spaOption: state.spaOption,
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      message: formData.get("message")
+    };
 
-  const btn = document.getElementById("submitBtn");
-  btn.disabled = true;
-  btn.textContent = "Redirection vers le paiement…";
+    const btn = document.getElementById("submitBtn");
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Redirection vers le paiement…";
+    }
 
-  try{
-    const res = await fetch(`${CONFIG.apiBase}/create-checkout`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Une erreur est survenue.");
-    window.location.href = data.url; // redirection vers Stripe Checkout
-  }catch(err){
-    errorEl.textContent = err.message || "Impossible de lancer le paiement. Merci de réessayer.";
-    btn.disabled = false;
-    btn.textContent = "Payer l'acompte et réserver";
-  }
-});
+    try{
+      const res = await fetch(`${CONFIG.apiBase}/create-checkout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Une erreur est survenue.");
+      window.location.href = data.url;
+    }catch(err){
+      if (errorEl) errorEl.textContent = err.message || "Impossible de lancer le paiement. Merci de réessayer.";
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = "Payer l'acompte et réserver";
+      }
+    }
+  });
+}
 
 /* ===========================================================
    INITIALISATION
    =========================================================== */
-document.getElementById("year").textContent = new Date().getFullYear();
-window.Jolireve = { selectFormula };
-loadAvailability();
-updateRecap();
+document.addEventListener("DOMContentLoaded", () => {
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  window.Jolireve = { selectFormula };
+  renderGallery("all");
+  loadAvailability();
+  updateRecap();
+});
