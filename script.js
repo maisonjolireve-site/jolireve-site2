@@ -56,7 +56,6 @@ const GALERIE_PHOTOS = [
   { src: "images/exterieur-babyfoot.jpeg", category: "exterieur", alt: "Baby-foot extérieur sous le préau" },
 
   // Spa de nage
-  { src: "images/spa-hero.jpeg", category: "exterieur", alt: "Cour en pierre et spa illuminé au crépuscule" },
   { src: "images/spa-14-bleu.jpeg", category: "spa", alt: "Ambiance nocturne éclairage LED bleu du spa" },
 
   // Séjour / Salon
