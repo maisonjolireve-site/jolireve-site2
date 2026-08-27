@@ -49,14 +49,14 @@ function euros(n){ return CONFIG.currency.format(n); }
    =========================================================== */
 const GALERIE_PHOTOS = [
   // Extérieur & Détente
+  { src: "images/spa-hero.jpeg", category: "exterieur", alt: "Cour en pierre et spa illuminé au crépuscule" },
   { src: "images/exterieur-table-soir-1.jpeg", category: "exterieur", alt: "Table dressée dehors sous les guirlandes lumineuses" },
+{ src: "images/exterieur-transats.jpeg", category: "exterieur", alt: "Espace transats et détente au soleil" },
   { src: "images/exterieur-brasero.jpeg", category: "exterieur", alt: "Espace brasero convivial dans la cour close" },
-  { src: "images/exterieur-transats.jpeg", category: "exterieur", alt: "Espace transats et détente au soleil" },
   { src: "images/exterieur-babyfoot.jpeg", category: "exterieur", alt: "Baby-foot extérieur sous le préau" },
 
   // Spa de nage
   { src: "images/spa-10.jpeg", category: "spa", alt: "Grand spa de nage chauffé avec vue d'ensemble" },
-  { src: "images/spa-5-jets.jpeg", category: "spa", alt: "Jets de massage et nage à contre-courant" },
   { src: "images/spa-14-bleu.jpeg", category: "spa", alt: "Ambiance nocturne éclairage LED bleu du spa" },
 
   // Séjour / Salon
