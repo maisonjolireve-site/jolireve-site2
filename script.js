@@ -199,7 +199,15 @@ const state = {
   viewYear: new Date().getFullYear()
 };
 
-function toISO(d){ return d.toISOString().slice(0, 10); }
+function toISO(d){
+  // Utilise la date LOCALE (et non UTC) pour éviter un décalage d'un jour
+  // en France (UTC+1/+2) : d.toISOString() convertit d'abord en UTC, ce qui
+  // faisait apparaître certaines dates comme libres ou occupées à tort.
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
 
 function isDateBooked(date){
   const iso = toISO(date);
