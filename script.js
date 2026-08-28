@@ -48,26 +48,43 @@ function euros(n){ return CONFIG.currency.format(n); }
    GALERIE PHOTOS
    =========================================================== */
 const GALERIE_PHOTOS = [
-  // Extérieur & Détente
+  // Extérieur & détente
   { src: "images/spa-hero.jpeg", category: "exterieur", alt: "Cour en pierre et spa illuminé au crépuscule" },
+  { src: "images/exterieur-facade-jour.jpeg", category: "exterieur", alt: "Façade en pierre de Maison Jolirêve en journée" },
+  { src: "images/exterieur-facade-soir.jpeg", category: "exterieur", alt: "Façade de la grange éclairée à la tombée du jour" },
   { src: "images/exterieur-table-soir-1.jpeg", category: "exterieur", alt: "Table dressée dehors sous les guirlandes lumineuses" },
-{ src: "images/exterieur-transats.jpeg", category: "exterieur", alt: "Espace transats et détente au soleil" },
+  { src: "images/exterieur-table-soir-2.jpeg", category: "exterieur", alt: "Grande tablée extérieure dans la cour illuminée" },
+  { src: "images/exterieur-table-guirlandes.jpeg", category: "exterieur", alt: "Repas convivial sous les guirlandes de la cour" },
+  { src: "images/exterieur-transats.jpeg", category: "exterieur", alt: "Espace transats et détente au soleil" },
   { src: "images/exterieur-brasero.jpeg", category: "exterieur", alt: "Espace brasero convivial dans la cour close" },
   { src: "images/exterieur-babyfoot.jpeg", category: "exterieur", alt: "Baby-foot extérieur sous le préau" },
+  { src: "images/exterieur-olivier.jpeg", category: "exterieur", alt: "Olivier dans la cour de la maison" },
 
   // Spa de nage
   { src: "images/spa-14-bleu.jpeg", category: "spa", alt: "Ambiance nocturne éclairage LED bleu du spa" },
+  { src: "images/spa-10.jpeg", category: "spa", alt: "Spa de nage chauffé dans la cour privative" },
+  { src: "images/spa-5-jets.jpeg", category: "spa", alt: "Jets de massage du spa de nage" },
+  { src: "images/spa-3-vert.jpeg", category: "spa", alt: "Spa de nage éclairé en vert le soir" },
+  { src: "images/spa-8-violet.jpeg", category: "spa", alt: "Spa de nage éclairé en violet" },
+  { src: "images/spa-13-rouge.jpeg", category: "spa", alt: "Spa de nage éclairé en rouge" },
 
-  // Séjour / Salon
+  // Séjour / salon
   { src: "images/salon-mezzanine-1.jpeg", category: "salon", alt: "Grand séjour lumineux avec poutres apparentes" },
+  { src: "images/salon-mezzanine-3.jpeg", category: "salon", alt: "Mezzanine et salon de la grange" },
+  { src: "images/salon-mezzanine-5.jpeg", category: "salon", alt: "Coin salon chaleureux sous les poutres" },
+  { src: "images/salon-mezzanine-8.jpeg", category: "salon", alt: "Vue d'ensemble du séjour de Maison Jolirêve" },
 
-  // Cuisine & Repas
+  // Cuisine & repas
   { src: "images/cuisine-table.jpeg", category: "cuisine", alt: "Grande table en chêne conviviale" },
+  { src: "images/cuisine-table-2.jpeg", category: "cuisine", alt: "Table de repas préparée pour les grandes tablées" },
+  { src: "images/cuisine-detail.jpeg", category: "cuisine", alt: "Détail de la cuisine de caractère" },
+  { src: "images/cuisine-vaisselle.jpeg", category: "cuisine", alt: "Vaisselle et détails de la cuisine" },
 
-  // Chambres & Salles d'eau
+  // Chambres & salles d'eau
   { src: "images/chambre-1.jpeg", category: "chambres", alt: "Chambre parentale lumineuse et soignée" },
-  { src: "images/chambre-2-tropical.jpeg", category: "chambres", alt: "Chambre double décoration chaleureuse" },
+  { src: "images/chambre-2-tropical.jpeg", category: "chambres", alt: "Chambre double à la décoration chaleureuse" },
   { src: "images/chambre-dortoir-lits-superposes.jpeg", category: "chambres", alt: "Dortoir familial avec lits superposés" },
+  { src: "images/salle-eau-dortoir.jpeg", category: "salle-eau", alt: "Salle d'eau attenante au dortoir" },
   { src: "images/salle-eau-douche-italienne.jpeg", category: "salle-eau", alt: "Salle d'eau moderne avec douche à l'italienne" },
   { src: "images/salle-eau-vasque.jpeg", category: "salle-eau", alt: "Meuble vasque et finitions soignées" }
 ];
